@@ -27,7 +27,7 @@ BlogSphere is a dynamic blog posting platform where users can create, read, upda
 ### Prerequisites
 
 Make sure you have the following installed on your system:
-- Python (3.9 or higher)
+- Python (3.10 or higher)
 - pip (Python package installer)
 - Git
 
@@ -35,7 +35,7 @@ Make sure you have the following installed on your system:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/blogsphere.git
+git clone https://github.com/Sarthakpurii/BlogSphere.git
 cd blogsphere
 ```
 
@@ -65,14 +65,13 @@ http://127.0.0.1:8000
 ## Configuration
 
 - Update the `settings.py` file for custom configurations like database settings, allowed hosts, and static files.
-- Set up a `.env` file for sensitive information like the secret key and database credentials.
 
 ## Usage
 
 - **Home Page**: Browse all available blogs.
 - **User Dashboard**: View, edit, and delete your blogs.
 - **Create Blog**: Use the rich text editor to craft your blog posts.
-- **Read Blog**: View full blog content with a clean and responsive design.
+- **Read Blog**: View full blog content with a clean design.
 
 ## Future Enhancements
 
