@@ -23,7 +23,7 @@ from django.shortcuts import redirect
 def home(request):
     
     context={
-        'posts':Post.objects.all()
+        'blogs':Post.objects.all()
     }
     return render(request, 'blog/home.html',context)
 
@@ -44,3 +44,9 @@ def create_blog(request):
     else:
         form=PostForm()
     return render(request,'blog/create_blog.html',{'form':form})
+
+def read_blog(request,id):
+    context={
+        'blog':Post.objects.get(pk=id)
+    }
+    return render(request,'blog/read_blog.html',context)

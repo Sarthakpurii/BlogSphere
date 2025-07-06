@@ -144,3 +144,45 @@ body {
 /* .profile-img-wrapper:hover .delete-btn-form {
   opacity: 1;
 } */
+
+.truncated-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;       /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        font-family: 'Georgia', serif;
+        line-height: 1.7;
+        background-color: #ffffff;
+    }
+
+.post-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+
+.post-meta {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 2rem;
+}
+
+.post-meta .author {
+    font-weight: 600;
+    color: #333;
+}
+
+.post-content {
+    font-size: 1.15rem;
+    color: #222;
+    white-space: pre-line;
+}
