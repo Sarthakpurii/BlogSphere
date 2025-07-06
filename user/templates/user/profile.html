@@ -1,25 +1,82 @@
-{% extends 'blog/base.html' %}
-{% load crispy_forms_tags %}
+{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="content-section">
+  <div class="media">
+    <!-- <div class="media align-items-center"> -->
+    <!-- Profile image wrapper with spacing -->
+   
 
-{% block content %}
-   <div class="content-section">
-      <div class="media">
-         <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
-         <div class='media-body'>
-            <h2 class="account-heading">{{user_data.username}}</h2>
-            <p class="text-secondary">{{user_data.email}}</p>
-         </div>
+    
+    <form
+      method="POST"
+      enctype="multipart/form-data"
+      action="{% url 'user-profile' %}"
+    >
+      {% csrf_token %}
+      <div class="d-flex align-items-center">
+        <div class="mr-4 profile-img-wrapper">
+          <label for="id_image">
+            <img
+              src="{{ user.profile.image.url }}"
+              class="profile-img rounded-circle"
+              alt="Profile Picture"
+            />
+            <div class="overlay">
+              <i class="fas fa-pencil-alt edit-icon"></i>
+            </div>
+          </label>
+          <input
+            type="file"
+            id="id_image"
+            name="image"
+            accept="image/png, image/jpeg"
+            style="display: none"
+          />
+        </div>
+        <div class="media-body">
+          <h2 class="account-heading">{{user_data.username}}</h2>
+          <p class="text-secondary">{{user_data.email}}</p>
+        </div>
+
+        <!-- 🔴 DELETE BUTTON -->
       </div>
-      <form method='POST' enctype="multipart/form-data">
-         {% csrf_token %}
-         <fieldset class='form-group'>
-            <legend class='border-bottom mb-4'> Update Profile</legend>
-            {{uForm|crispy}}
-            {{pForm|crispy}}
-         </fieldset>
-         <div class='form-group'>
-            <button class='btn btn-outline-info' type='submit'>Update</button>
-         </div>
-      </form>
-   </div>
+
+      <!-- Text details -->
+      <!-- <div class="media-body">
+    <h2 class="account-heading mb-0">{{ user_data.username }}</h2>
+    <p class="text-secondary">{{ user_data.email }}</p>
+  </div>
+</div> -->
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Update Profile</legend>
+        {{uForm|crispy}}
+        <!-- {{pForm|crispy}} -->
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </div>
+    </form>
+    
+    {% if user.profile.image.name != 'profile-pics/default.jpg' %}
+     <form
+      method="POST"
+      action="{% url 'delete-profile-image' %}"
+      class="delete-btn-form"
+    >
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="btn btn-sm btn-danger rounded-circle delete-btn"
+        title="Remove image"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </form>
+    {% endif %}
+  </div>
+<!-- </div> -->
+<script>
+   document.getElementById('id_image').addEventListener('change', function () {
+      this.form.submit();
+   });
+</script>
 {% endblock content %}

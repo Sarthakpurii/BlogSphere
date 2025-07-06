@@ -83,3 +83,62 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+.profile-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4); /* translucent grey */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-img-wrapper:hover .overlay {
+  opacity: 1;
+}
+
+.edit-icon {
+  color: white;
+  font-size: 24px;
+}
+
+.delete-btn-form {
+  position: relative;
+  /* opacity: 0; */
+  transition: opacity 0.2s ease;
+  top: 12px;
+  right: 268px;
+}
+
+.delete-btn {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .profile-img-wrapper:hover .delete-btn-form {
+  opacity: 1;
+} */

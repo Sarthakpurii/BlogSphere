@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+import os
 
 
 def register(request):
@@ -44,3 +46,16 @@ def profile(request):
         'user_data': request.user,
     }
     return render(request,template_name='user/profile.html', context=context)
+
+
+def delete_profile_image(request):
+    if request.method=="POST":
+        profile=request.user.profile
+        default_image='profile-pics/default.jpg'
+        if profile.image and profile.image.name!=default_image:
+            image_path=os.path.join(settings.MEDIA_ROOT,profile.image.name)
+            if os.path.exists(image_path):
+                os.remove(image_path)
+            profile.image=default_image
+            profile.save()
+    return redirect('user-profile')
