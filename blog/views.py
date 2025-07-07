@@ -23,7 +23,7 @@ from django.shortcuts import redirect, get_object_or_404
 def home(request):
     
     context={
-        'blogs':Post.objects.all()
+        'blogs':Post.objects.order_by('-date_posted')
     }
     return render(request, 'blog/home.html',context)
 
