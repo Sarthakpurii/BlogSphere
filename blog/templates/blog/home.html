@@ -4,13 +4,12 @@
 <article class="media content-section">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="#">{{ blog.author }}</a>
+        <a class="mr-2" href="{% url 'user-blogs' blog.author.username %}">{{ blog.author}}</a>
         <small class="text-muted">{{ blog.date_posted }}</small>
       </div>
       <h2><a class="article-title" href="{% url 'read-blog' blog.id %}">{{ blog.title }}</a></h2>
       <p class="article-content truncated-text">{{ blog.content }}</p>
       <a href="{% url 'read-blog' blog.id %}" class="btn btn-link p-0">Read more</a>
-
     </div>
   </article>
 {% endfor %}

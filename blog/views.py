@@ -26,6 +26,12 @@ def home(request):
         'blogs':Post.objects.order_by('-date_posted')
     }
     return render(request, 'blog/home.html',context)
+def user_blogs(request,username):
+    
+    context={
+        'blogs':Post.objects.filter(author__username=username).order_by('-date_posted')
+    }
+    return render(request, 'blog/home.html',context)
 
 def about(request):
     return render(request,'blog/about.html',{'title':'About'})

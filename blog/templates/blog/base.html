@@ -56,6 +56,7 @@
             {% endif %}
             {% block content %}{% endblock %}
           </div>
+          {%if user.is_authenticated%}
           <div class="col-md-4">
             <div class="content-section">
               <h3 class="fw-bold border-bottom border-secondary pb-2 mb-4">Quick links</h3>
@@ -65,7 +66,7 @@
                     <a href="{% url 'create-blog' %}" class="text-dark">Create Blog</a>
                   </li>
                   <li class="list-group-item list-group-item-light">
-                    <a href="{% url 'user-profile' %}" class="text-dark">Your Blogs</a>
+                    <a href="{% url 'user-blogs' request.user.username %}" class="text-dark">Your Blogs</a>
                   </li>
                   <li class="list-group-item list-group-item-light">
                     <a href="{% url 'blog-home' %}" class="text-dark">Latest Blogs</a>
@@ -73,6 +74,8 @@
                 </ul>
             </div>
           </div>
+          {%endif%}
+
         </div>
       </main>
   <!-- Optional JavaScript -->
