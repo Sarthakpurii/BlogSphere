@@ -9,4 +9,10 @@ urlpatterns = [
     path('<int:id>/',views.read_blog,name="read-blog"),
     path('<int:id>/delete/',views.delete_blog,name="delete-blog"),
     path('<str:username>/',views.user_blogs,name="user-blogs"),
+    
+    #APIs
+    path('api/blogs/',views.api_home),
+    path('api/create/',views.api_create_blog),
+    path('api/update/<int:pk>/',views.api_update_blog),
+    path('api/delete/<int:pk>/',views.api_delete_blog),
 ]

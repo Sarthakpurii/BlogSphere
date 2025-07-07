@@ -20,6 +20,8 @@ from user import views as userViews
 from django.contrib.auth import views as authViews
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/',include('blog.urls')),
@@ -28,6 +30,7 @@ urlpatterns = [
     path('login/',authViews.LoginView.as_view(template_name='user/login.html'),name='user-login'),
     path('logout/',authViews.LogoutView.as_view(template_name='user/logout.html'),name='user-logout'),
     path('profile/',userViews.profile,name='user-profile'),
+    path('api/token/', obtain_auth_token, name='api-token'),
 ]
 
 if settings.DEBUG:

@@ -4,7 +4,11 @@ from .models import Post
 from .forms import PostForm
 from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.decorators import api_view,permission_classes
+from .serializers import PostSerializer
+from rest_framework.permissions import IsAuthenticated
 
 # posts=[
 #     {
@@ -74,3 +78,51 @@ def delete_blog(request,id):
         messages.success(request,f"Your blog has been deleted.")
         return redirect('blog-home')
     return HttpResponseForbidden()
+
+
+
+''' 
+APIs 
+'''
+@api_view(['GET'])
+def api_home(request):
+    blogs=Post.objects.all()
+    serializer=PostSerializer(blogs,many=True)
+    
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def api_create_blog(request):
+    serializer = PostSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(author=request.user)  
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def api_update_blog(request, pk):
+    try:
+        post = Post.objects.get(pk=pk, author=request.user) 
+    except Post.DoesNotExist:
+        return Response({'error': 'Not found'}, status=404)
+
+    serializer = PostSerializer(post, data=request.data, partial=(request.method == 'PATCH'))
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def api_delete_blog(request,pk):
+    try:
+        blog=Post.objects.get(pk=pk,author=request.user)
+    except Post.DoesNotExist:
+        return Response({'error': 'Not found'}, status=404)
+        
+    serializer=PostSerializer(blog)
+    blog.delete()
+    return Response(serializer.data)
+        
