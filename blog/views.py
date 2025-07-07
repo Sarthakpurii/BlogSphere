@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from .models import Post
 from .forms import PostForm
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 
 # posts=[
@@ -37,7 +37,7 @@ def create_blog(request):
             blog=form.save(commit=False)
             blog.author=request.user
             blog.save()
-            messages.success(request,f"Your blog has been posted.")
+            messages.success(request,f"Your blog has been published.")
             return redirect('blog-home')
         else:
             messages.error(request,f"Please correct the errors below.")
@@ -47,6 +47,14 @@ def create_blog(request):
 
 def read_blog(request,id):
     context={
-        'blog':Post.objects.get(pk=id)
+        'blog':get_object_or_404(Post, id=id)
     }
     return render(request,'blog/read_blog.html',context)
+
+def delete_blog(request,id):
+    blog=get_object_or_404(Post, id=id)
+    if request.method=="POST" and blog.author==request.user:
+        blog.delete()
+        messages.success(request,f"Your blog has been deleted.")
+        return redirect('blog-home')
+    return HttpResponseForbidden()

@@ -188,7 +188,7 @@ body {
 }
 
 .three-dot-btn {
-  position: absolute;
+  /* position: absolute; */
     background: none;
     right:8px;
     border: none;
