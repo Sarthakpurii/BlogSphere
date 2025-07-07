@@ -186,3 +186,41 @@ body {
     color: #222;
     white-space: pre-line;
 }
+
+.three-dot-btn {
+  position: absolute;
+    background: none;
+    right:8px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.3rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0;  /* Start from button's left */
+    top: 0;   /* Align vertically with button */
+    transform: translateX(-100%);  /* Shift full width to the left */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 120px;
+    z-index: 1000;
+    padding: 0.3rem 0;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f2f2f2;
+}

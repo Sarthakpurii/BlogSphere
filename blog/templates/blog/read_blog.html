@@ -1,8 +1,41 @@
+
+<script>
+function toggleDropdown(event) {
+    console.log("Button clicked");
+    event.stopPropagation();
+
+    const button = event.currentTarget;
+    const menu = button.nextElementSibling;
+    console.log("Dropdown menu:", menu);
+
+    if (menu) {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+}
+
+document.addEventListener("click", function () {
+    document.querySelectorAll(".dropdown-menu").forEach(menu => {
+        menu.style.display = "none";
+    });
+});
+</script>
 {% extends "blog/base.html" %}
 
 {% block content %}
 <div class="post-container">
+    {% if user == blog.author %}
+        <div style="text-align: right;">
+        <div class="dropdown-container" style="position: relative; display: inline-block;">
+    <button class="three-dot-btn" onclick="toggleDropdown(event)">⋮</button>
+            <div class="dropdown-menu" style="display: none; position: absolute; right: 0;">
+                <a href="{% url 'user-profile'  %}" class="dropdown-item">Edit</a>
+                <a href="{% url 'user-profile'  %}" class="dropdown-item">Delete</a>
+            </div>
+        </div>
+        </div>
+    {% endif %}
     <h1 class="post-title">{{ blog.title }}</h1>
+    <h1 class="post-title">{{ user }}</h1>
     <div class="post-meta">
         <span class="author">by {{ blog.author.get_full_name|default:blog.author.username }}</span>
         &bull;
