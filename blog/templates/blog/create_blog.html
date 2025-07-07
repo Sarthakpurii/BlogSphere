@@ -3,8 +3,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-5">
-  <h2 class="mb-4">Create a New Blog Post</h2>
-  <form method="POST" enctype="multipart/form-data" action="{% url 'create-blog' %}">
+  <h2 class="mb-4">{% if form.instance.pk %}Update your Blog{% else %}Create a new Blog Post{% endif %}</h2>
+  <form method="POST" enctype="multipart/form-data" action="{% if form.instance.pk %}{% url 'update-blog' form.instance.pk %}{% else %}{% url 'create-blog' %}{% endif %}">
     {% csrf_token %}
     
     <div class="form-group mb-3">

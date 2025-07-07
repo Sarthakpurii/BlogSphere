@@ -28,13 +28,13 @@ document.addEventListener("click", function () {
         <div class="dropdown-container" style="position: relative; display: inline-block;">
     <button class="three-dot-btn" onclick="toggleDropdown(event)">⋮</button>
             <div class="dropdown-menu" style="display: none; position: absolute; right: 0;">
-                <a href="{% url 'delete-blog' blog.id %}" class="dropdown-item">Edit</a>
+                <a href="{% url 'update-blog' blog.id %}" class="dropdown-item">Edit</a>
                <form method="POST" action="{% url 'delete-blog' blog.id  %}" style="margin: 0;">
-    {% csrf_token %}
-    <button type="submit" class="dropdown-item">
-        Delete
-    </button>
-</form>
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item">
+                        Delete
+                    </button>
+                </form>
             </div>
         </div>
         </div>
