@@ -1,5 +1,9 @@
 {% extends "blog/base.html"%}
 {% block content %}
+{% if posted_by %}
+  <h1 class="mb-4 text-center">Blogs by {{ posted_by }}</h1>
+  {% endif %}
+{% if not blogs %}<h4 class="text-center">Seems like author never wrote one...</h4>{% endif %}
 {% for blog in blogs %}
 <article class="media content-section">
     <div class="media-body">

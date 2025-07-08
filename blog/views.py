@@ -33,7 +33,8 @@ def home(request):
 def user_blogs(request,username):
     
     context={
-        'blogs':Post.objects.filter(author__username=username).order_by('-date_posted')
+        'blogs':Post.objects.filter(author__username=username).order_by('-date_posted'),
+        'posted_by':username
     }
     return render(request, 'blog/home.html',context)
 
